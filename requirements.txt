@@ -1,0 +1,4 @@
+# Probado con Python 3.13, networkx 3.7 y matplotlib 3.11.2.
+# numpy y pillow se instalan como dependencias de matplotlib.
+networkx>=3.0
+matplotlib>=3.7

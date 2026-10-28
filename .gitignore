@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Salidas generadas por main.py --evidencias / --autoprueba
+evidencias/
+
+# Imágenes de terceros (no redistribuibles)
+datos/croquis_campus_espe.png
+datos/mapa_puntos_encuentro_2019.png
+datos/referencia_simulador_tabu.png
+
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

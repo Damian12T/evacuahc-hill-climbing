@@ -1,0 +1,74 @@
+{
+  "descripcion": "Grafo de evacuación de los bloques G y H (ESPE, campus Sangolquí). Escenario académico simulado, sin validación operativa.",
+  "fuentes": {
+    "informe": "Flores, Bolaños y Gómez (2026). Sistema inteligente de optimización de rutas de evacuación para los bloques G y H mediante Búsqueda Tabú. Informe académico, ESPE.",
+    "figura_grafo": "Captura del simulador anterior (datos/referencia_simulador_tabu.png, 1999 x 1125 px, panel izquierdo). Misma topología que la figura 2 del informe.",
+    "osm": "Colaboradores de OpenStreetMap (2026), citado en el informe como [5]."
+  },
+  "calibracion": {
+    "descripcion": "Las posiciones en píxeles de todos los nodos se midieron sobre la figura de referencia. Los destinos P1, P2 y P3 tienen además coordenadas geográficas documentadas; se usan como puntos de control para ajustar una transformación de semejanza píxel -> metros. Las posiciones de G, H, S, K, J y L en metros son, por tanto, ESTIMADAS.",
+    "puntos_control": ["P1", "P2", "P3"]
+  },
+  "nodos": [
+    {"id": "G", "nombre": "Bloque G", "tipo": "origen", "px": [242.5, 280.0], "salida_obligatoria": "S",
+     "descripcion": "Ala oeste del edificio que OpenStreetMap registra como «Bloque C y D». Sin puerta propia al exterior.",
+     "fuente": "Informe, sección 3 (identificación del grupo). Posición medida en la figura."},
+    {"id": "H", "nombre": "Bloque H", "tipo": "origen", "px": [380.0, 334.0], "salida_obligatoria": "S", "etiqueta": "derecha",
+     "descripcion": "Ala este del edificio «Bloque C y D». Sin puerta propia al exterior.",
+     "fuente": "Informe, sección 3 (identificación del grupo). Posición medida en la figura."},
+    {"id": "S", "nombre": "Puerta sur (hall central)", "tipo": "salida", "px": [336.5, 345.0],
+     "descripcion": "Puerta sur del hall central compartida por G y H.",
+     "fuente": "Informe, secciones 3 y 4 (verificado por el grupo). Posición medida en la figura."},
+    {"id": "K", "nombre": "Acceso al Área Verde", "tipo": "acceso", "px": [422.0, 451.0],
+     "descripcion": "Punto de acceso al Área Verde.",
+     "fuente": "Informe, sección 4. Posición medida en la figura."},
+    {"id": "J", "nombre": "Acceso a la Plaza", "tipo": "acceso", "px": [442.5, 671.0],
+     "descripcion": "Punto de acceso a la Plaza ESPE.",
+     "fuente": "Informe, sección 4. Posición medida en la figura."},
+    {"id": "L", "nombre": "Acceso al camino de las canchas", "tipo": "acceso", "px": [442.5, 837.5],
+     "descripcion": "Punto de acceso al camino de las canchas deportivas.",
+     "fuente": "Informe, sección 4. Posición medida en la figura."},
+    {"id": "P1", "nombre": "Plaza ESPE", "tipo": "destino", "px": [520.0, 761.0],
+     "lat": -0.31448, "lon": -78.44470, "cupo_supuesto": 100,
+     "descripcion": "Punto de encuentro modelado. Cupo didáctico, no aforo medido.",
+     "fuente": "Coordenadas: informe, sección 3 (aportadas por el grupo y coincidentes con OSM)."},
+    {"id": "P2", "nombre": "Área Verde ESPE", "tipo": "destino", "px": [552.5, 552.5],
+     "lat": -0.31382, "lon": -78.44460, "cupo_supuesto": 100,
+     "descripcion": "Punto de encuentro modelado. Cupo didáctico, no aforo medido.",
+     "fuente": "Coordenadas: informe, sección 3 (aportadas por el grupo y coincidentes con OSM)."},
+    {"id": "P3", "nombre": "Canchas deportivas", "tipo": "destino", "px": [538.5, 1024.0],
+     "lat": -0.31531, "lon": -78.44465, "cupo_supuesto": 140,
+     "descripcion": "Punto de encuentro modelado. Cupo didáctico, no aforo medido.",
+     "fuente": "Coordenadas: informe, sección 3 (aportadas por el grupo y coincidentes con OSM)."}
+  ],
+  "aristas": [
+    {"origen": "G", "destino": "S", "longitud_m": 44.6, "flujo_supuesto": 2.0, "tipo": "interior",
+     "descripcion": "Recorrido interior hasta la puerta sur (estimado en línea recta)."},
+    {"origen": "H", "destino": "S", "longitud_m": 20.6, "flujo_supuesto": 2.0, "tipo": "interior",
+     "descripcion": "Recorrido interior hasta la puerta sur (estimado en línea recta)."},
+    {"origen": "S", "destino": "J", "longitud_m": 143.1, "flujo_supuesto": 1.4, "tipo": "exterior",
+     "descripcion": "Sendero exterior desde la puerta sur hasta el acceso a la Plaza."},
+    {"origen": "S", "destino": "K", "longitud_m": 57.0, "flujo_supuesto": 1.8, "tipo": "exterior",
+     "descripcion": "Sendero exterior desde la puerta sur hasta el acceso al Área Verde."},
+    {"origen": "S", "destino": "L", "longitud_m": 199.1, "flujo_supuesto": 1.3, "tipo": "exterior",
+     "descripcion": "Sendero exterior desde la puerta sur hasta el camino de las canchas."},
+    {"origen": "J", "destino": "P1", "longitud_m": 42.1, "flujo_supuesto": 0.72, "tipo": "acceso_final",
+     "descripcion": "Acceso final a la Plaza ESPE."},
+    {"origen": "K", "destino": "P2", "longitud_m": 58.2, "flujo_supuesto": 0.3, "tipo": "acceso_final",
+     "descripcion": "Acceso final al Área Verde (flujo reducido según el informe)."},
+    {"origen": "L", "destino": "P3", "longitud_m": 98.0, "flujo_supuesto": 1.0, "tipo": "acceso_final",
+     "descripcion": "Acceso final a las canchas deportivas."}
+  ],
+  "escenarios": {
+    "normal": {
+      "nombre": "Todas las conexiones habilitadas",
+      "bloqueadas": [],
+      "fuente": "Informe, sección 6."
+    },
+    "acceso_P1_bloqueado": {
+      "nombre": "Acceso a P1 bloqueado (J -> P1)",
+      "bloqueadas": [["J", "P1"]],
+      "fuente": "Informe, sección 6 y anexo C."
+    }
+  }
+}
